@@ -1,9 +1,20 @@
-// -------------- MOSTRAR TRENDING MOVIES EN EL INICIO ------------------
-async function getTrendingMoviesPreview(){
-    const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
-    const data = await res.json();
+const api = axios.create({ //Crear la configuración por defecto para trabajar en el resto de consultas
+    baseURL: 'https://api.themoviedb.org/3/',
+    headers:{
+        'Content-Type': 'application/json;charset=utf-8',
+    },
+    params: {
+        'api_key': API_KEY,
+    },
+});
 
+// -------------- MOSTRAR TRENDING MOVIES EN EL INICIO ------------------
+
+async function getTrendingMoviesPreview(){
+    const { data } = await api('trending/movie/day');
+//    const data = await res.json(); //Ya no se usa para convertir los objetos a JavaScript porque axios da una respuesta distinta
     const movies = data.results;
+    
     movies.forEach(movie => {
         const getTrendingMoviesPreviewContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
 
@@ -23,10 +34,9 @@ async function getTrendingMoviesPreview(){
 // ------------------------ LISTA DE CATEGORÍAS  -----------------------------
 
 async function getCategoriesPreview(){
-    const res = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=' + API_KEY);
-    const data = await res.json();
-
+    const { data } = await api('genre/movie/list');
     const categories = data.genres;
+
     categories.forEach(category => {
         const getCategoriesPreviewContainer = document.querySelector('#categoriesPreview .categoriesPreview-list')
 

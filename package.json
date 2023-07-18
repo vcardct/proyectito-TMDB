@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/vcardct/proyectito-TMDB/issues"
   },
-  "homepage": "https://github.com/vcardct/proyectito-TMDB#readme"
+  "homepage": "https://github.com/vcardct/proyectito-TMDB#readme",
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
 }
