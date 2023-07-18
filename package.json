@@ -1,0 +1,19 @@
+{
+  "name": "proyecto-tmdb",
+  "version": "1.0.0",
+  "description": "captura de datos de una API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vcardct/proyectito-TMDB.git"
+  },
+  "author": "Vanessa Cardenas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vcardct/proyectito-TMDB/issues"
+  },
+  "homepage": "https://github.com/vcardct/proyectito-TMDB#readme"
+}
