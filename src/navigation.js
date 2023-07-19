@@ -1,43 +1,121 @@
 //  Ya no se llaman las funciones automaticamente sino llamarlo desde este archivo cuando el location o hash change avise en qué vista está (principal u otra)
 
+searchFormBtn.addEventListener('click', () => {
+    location.hash = '#search=';
+});
+
+trendingBtn.addEventListener('click', () => {
+    location.hash = '#trends=';
+});
+
+arrowBtn.addEventListener('click', () => {
+    location.hash = '#home';
+})
+
 window.addEventListener('DOMContentLoaded', navigator, false); // Llamarlo para la primera carga de la app
 window.addEventListener('hashchange', navigator, false); //Se llama cuando el url cambia
 
 function navigator(){
     console.log({location});
 
-    if(location.hash.startsWith('#trends')){
-        trendsPage();
-    } else if(location.hash.startsWith('#search=')){
-        searchPage();
-    } else if(location.hash.startsWith('#movie=')){
-        movieDetailsPage();
-    } else if(location.hash.startsWith('#category=')){
-        categoriesPage();
-    } else{
-        homePage();
-    }
+    //Uso de operadores terniarios
+    location.hash.startsWith('#trends')
+    ? trendsPage()       :
+    location.hash.startsWith('#search=')
+    ? searchPage()       :
+    location.hash.startsWith('#movie=')
+    ? movieDetailsPage() :
+    location.hash.startsWith('#category=')
+    ? categoriesPage()   :
+    homePage()
+
     location.hash
 }
 
 function homePage(){
     console.log('Home Page');
+
+    headerSection.classList.remove('header-container--long'); //Para removerlo de esa sección
+    headerSection.style.background = ''; //imagen para tener efecto de la pelicula
+    arrowBtn.classList.add('inactive'); //Para que no aparezca en esa sección
+    arrowBtn.classList.remove('header-arrow--white'); //Para que aparezca la flecha en blanco y no morado
+    headerTitle.classList.remove('inactive'); // En caso que lo llegue a tener, quitarle la clase inactive para que se muestre
+    headerCategoryTitle.classList.add('inactive'); //Esconderlo porque no estamos en categoría
+    searchForm.classList.remove('inactive');
+
+    trendingPreviewSection.classList.remove('inactive');
+    categoriesPreviewSection.classList.remove('inactive');
+    genericSection.classList.add('inactive');
+    movieDetailSection.classList.add('inactive');
+
     getTrendingMoviesPreview();
     getCategoriesPreview();
 }
 
 function trendsPage(){
     console.log('Trends Page');
+
+    headerSection.classList.remove('header-container--long'); //Para removerlo de esa sección
+    headerSection.style.background = ''; //imagen para tener efecto de la pelicula
+    arrowBtn.classList.remove('inactive'); //Para que no aparezca en esa sección
+    arrowBtn.classList.remove('header-arrow--white'); //Para que aparezca la flecha en blanco y no morado
+    headerTitle.classList.add('inactive'); // En caso que lo llegue a tener, quitarle la clase inactive para que se muestre
+    headerCategoryTitle.classList.remove('inactive'); //Esconderlo porque no estamos en categoría
+    searchForm.classList.add('inactive');
+
+    trendingPreviewSection.classList.add('inactive');
+    categoriesPreviewSection.classList.add('inactive');
+    genericSection.classList.remove('inactive'); //Quitar clase inactive
+    movieDetailSection.classList.add('inactive');
 }
 
 function searchPage(){
     console.log('Search Page');
+
+    headerSection.classList.remove('header-container--long'); //Para removerlo de esa sección
+    headerSection.style.background = ''; //imagen para tener efecto de la pelicula
+    arrowBtn.classList.remove('inactive'); //Para que no aparezca en esa sección
+    arrowBtn.classList.remove('header-arrow--white'); //Para que aparezca la flecha en blanco y no morado
+    headerTitle.classList.add('inactive'); // En caso que lo llegue a tener, quitarle la clase inactive para que se muestre
+    headerCategoryTitle.classList.remove('inactive'); //Esconderlo porque no estamos en categoría
+    searchForm.classList.remove('inactive');
+
+    trendingPreviewSection.classList.add('inactive');
+    categoriesPreviewSection.classList.add('inactive');
+    genericSection.classList.remove('inactive'); //Quitar clase inactive
+    movieDetailSection.classList.add('inactive');
 }
 
 function movieDetailsPage(){
     console.log('Movie Page');
+
+    headerSection.classList.add('header-container--long'); //Para removerlo de esa sección
+    //headerSection.style.background = ''; //imagen para tener efecto de la pelicula
+    arrowBtn.classList.remove('inactive'); //Para que no aparezca en esa sección
+    arrowBtn.classList.add('header-arrow--white'); //Para que aparezca la flecha en morado y no blanco
+    headerTitle.classList.add('inactive'); // En caso que lo llegue a tener, quitarle la clase inactive para que se muestre
+    headerCategoryTitle.classList.add('inactive'); //Esconderlo porque no estamos en categoría
+    searchForm.classList.add('inactive');
+    
+    trendingPreviewSection.classList.add('inactive');
+    categoriesPreviewSection.classList.add('inactive');
+    genericSection.classList.add('inactive');
+    movieDetailSection.classList.remove('inactive');
 }
 
 function categoriesPage(){
     console.log('Categories Page');
+
+    headerSection.classList.remove('header-container--long'); //Para removerlo de esa sección
+    headerSection.style.background = ''; //imagen para tener efecto de la pelicula
+    arrowBtn.classList.remove('inactive'); //Para que no aparezca en esa sección
+    arrowBtn.classList.remove('header-arrow--white'); //Para que aparezca la flecha en blanco y no morado
+    headerTitle.classList.add('inactive'); // En caso que lo llegue a tener, quitarle la clase inactive para que se muestre
+    headerCategoryTitle.classList.remove('inactive'); //Esconderlo porque no estamos en categoría
+    searchForm.classList.add('inactive');
+
+    trendingPreviewSection.classList.add('inactive');
+    categoriesPreviewSection.classList.add('inactive');
+    genericSection.classList.remove('inactive'); //Quitar clase inactive
+    movieDetailSection.classList.add('inactive');
 }
