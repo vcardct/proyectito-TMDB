@@ -17,14 +17,14 @@ async function getTrendingMoviesPreview(){
     const movies = data.results;
 
     movies.forEach(movie => {
-        //const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-movieList')
-        //const movieContainer = document.createElement('div');
-        //movieContainer.classList.add('movie-container');
+        const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-movieList')
+        const movieContainer = document.createElement('div');
+        movieContainer.classList.add('movie-container');
 
-        //const movieImg = document.createElement('img');
-        //movieImg.classList.add('movie-img');
+        const movieImg = document.createElement('img');
+        movieImg.classList.add('movie-img');
         console.log("LOS TITULOS SON: ")
-        //movieImg.setAttribute('alt', movie.title);
+        movieImg.setAttribute('alt', movie.title);
         console.log(movie.title);
         movieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w300' + movie.poster_path,);
 

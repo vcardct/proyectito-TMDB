@@ -4,6 +4,7 @@ const express = require('express');
 const API_KEY = require('./secrets').API_KEY;
 const baseURL = 'https://api.themoviedb.org/3/';
 const responseTime = require('response-time');
+const cacheRedisKey = 'cache-movies:trends:LoQueQuiera';
 
 // Crea el cliente Redis
 const redisClient = redis.createClient({
@@ -35,7 +36,7 @@ app.get("/trends", async (req,res) => {
         const response = await axios.get(baseURL + 'trending/movie/day?api_key=' + API_KEY);
 
         // Guardamos la respuesta en Redis con una expiración en segundos
-        redisClient.setEx(req.url, 300, JSON.stringify(response.data));
+        redisClient.setEx(cacheRedisKey, 120, JSON.stringify(response.data));
         console.timeEnd('Tiempo de búsqueda y caché de Redis');
 
         // Acceder al arreglo de películas en la respuesta
