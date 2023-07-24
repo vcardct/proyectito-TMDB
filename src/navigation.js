@@ -118,4 +118,9 @@ function categoriesPage(){
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive'); //Quitar clase inactive
     movieDetailSection.classList.add('inactive');
+
+    const [_, categoryData] = location.hash.split('='); //crear un array donde cada nuevo elemento se volverá parte del array
+    const [categoryId, categoryName] = categoryData.split('-'); //LOs elementos se dividirán por -
+
+    getMoviesBoCategory(id);
 }
