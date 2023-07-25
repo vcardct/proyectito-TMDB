@@ -70,14 +70,13 @@ app.get("/trends", async (req,res) => {
 app.listen(3000);
 console.log("Server on port 3000");
 */
-
 const redis = require('redis');
 const axios = require('axios');
 const express = require('express');
 const API_KEY = require('./secrets').API_KEY;
 const baseURL = 'https://api.themoviedb.org/3/';
 const responseTime = require('response-time');
-const cacheRedisKey = 'cache-movies:trends:25665' //${new Date().toISOString().slice(0, 10)}';
+const cacheRedisKey = 'cache-movies:trends:25665';
 
 const redisClient = redis.createClient({
   host: '127.0.0.1',
@@ -102,11 +101,9 @@ app.use(responseTime());
 
 app.get("/trends", async (req, res) => {
   try {
-    const data = await cacheRedis();
-  if (data) {
-      console.log('Datos encontrados en el caché de Redis');
-      res.json(data);
-    }
+    const movieData = await cacheRedis();
+      res.json(movieData);
+    //}
   }
   catch (error) {
     console.error('Error al obtener tendencias:', error);
@@ -116,17 +113,18 @@ app.get("/trends", async (req, res) => {
 
 
 async function cacheRedis(force_new_key = false) {
-
+/* Cambiar el false por True, correr y actualizar la página. 
+Después que la página muestre los datos en JSON, cambiar el true por False y correr el programa
+El caché funcionará hasta que pasen los 2 minutos, una vez pasado este tiempo se pondrá en blanco la pagina
+*/
   if (!force_new_key) {
-    let stored_token = await redisClient.GET(cacheRedisKey);
-    console.log('Stored_token ======= ', stored_token)
-    if (stored_token) return stored_token;
+    let stored_token = await redisClient.get(cacheRedisKey);
+    console.log('Stored_token ======= ', JSON.parse(stored_token));
+    if (stored_token) return JSON.parse(stored_token);
   }
    else {
-    
     // Si los datos no están en el caché, hacer la solicitud a la API
     console.log('Datos no encontrados en el caché. Haciendo solicitud a la API...');
-
     const response = await axios.get(baseURL + 'trending/movie/day?api_key=' + API_KEY);
     const movies = response.data.results;
 
