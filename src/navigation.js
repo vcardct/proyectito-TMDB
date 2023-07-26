@@ -29,8 +29,20 @@ function navigator(){
     ? categoriesPage()   :
     homePage()
 
-    location.hash
+    smoothscroll();
 }
+
+function smoothscroll(){
+     const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo (0,currentScroll - (currentScroll/5));
+    }
+
+    /* Esta es otra forma de hacerlo
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0; */
+};
 
 function homePage(){
     console.log('Home Page');
@@ -119,8 +131,10 @@ function categoriesPage(){
     genericSection.classList.remove('inactive'); //Quitar clase inactive
     movieDetailSection.classList.add('inactive');
 
-    const [_, categoryData] = location.hash.split('='); //crear un array donde cada nuevo elemento se volverá parte del array
+    const [_, categoryData] = location.hash.split('='); //crear un array donde cada nuevo elemento se volverá parte del array ['category', 'id-name']
     const [categoryId, categoryName] = categoryData.split('-'); //LOs elementos se dividirán por -
 
-    getMoviesBoCategory(id);
+    headerCategoryTitle.innerHTML = decodeURIComponent(categoryName);
+
+    getMoviesByCategory(categoryId);
 }

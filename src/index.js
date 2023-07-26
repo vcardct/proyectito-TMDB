@@ -103,7 +103,7 @@ app.get("/trends", async (req, res) => {
   try {
     const movieData = await cacheRedis();
       res.json(movieData);
-    //}
+    
   }
   catch (error) {
     console.error('Error al obtener tendencias:', error);
@@ -112,8 +112,8 @@ app.get("/trends", async (req, res) => {
 });
 
 
-async function cacheRedis(force_new_key = false) {
-/* Cambiar el false por True, correr y actualizar la página. 
+async function cacheRedis(force_new_key) {
+/* Cambiar el false por True, correr y actualizar la página.
 Después que la página muestre los datos en JSON, cambiar el true por False y correr el programa
 El caché funcionará hasta que pasen los 2 minutos, una vez pasado este tiempo se pondrá en blanco la pagina
 */
@@ -137,7 +137,7 @@ El caché funcionará hasta que pasen los 2 minutos, una vez pasado este tiempo 
 
     // Guardar la respuesta en el caché de Redis con una expiración de 2 minutos (120 segundos)
     redisClient.setEx(cacheRedisKey, 120, JSON.stringify(movieData));
-
+    force_new_key = false;
     // Enviar la respuesta JSON al cliente con el arreglo de datos de las películas
     return movieData;
   }
