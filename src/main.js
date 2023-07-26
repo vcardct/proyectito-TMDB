@@ -115,7 +115,7 @@ async function getTrendingMovies(){
 async function getMovieDetailsById(id){
     const { data: movie } = await api('movie/' + id); //recibir objeto data porque así funciona axios y renombrarlo como movie
 
-    const movieImgUrl = 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
+    const movieImgUrl = 'https://image.tmdb.org/t/p/w400' + movie.poster_path;
     headerSection.style.background = `linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.35) 19.27%,
@@ -128,6 +128,14 @@ async function getMovieDetailsById(id){
     movieDetailScore.textContent = movie.vote_average.toFixed(1); // El toFixed(1) es para que aparezca solo un decimal en el ranking
 
     createCategories(movie.genres, movieDetailCategoriesList);
+    getRelatedMoviesId(id);
 }
 
-getTrendingMoviesPreview();
+async function getRelatedMoviesId(id){
+    const { data } = await api(`movie/${id}/recommendations`);
+    const relatedMovies = data.results;
+
+    createMovies(relatedMovies, relatedMoviesContainer);
+}
+
+//getTrendingMoviesPreview();

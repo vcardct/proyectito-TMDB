@@ -104,7 +104,7 @@ function searchPage(){
 
     // ['#search'], 'LoQUeSEHayaBuscado']
     const [_, query] = location.hash.split("="); //convertir en un array lo que se tenga en un string
-    getMoviesBySEarch(query);
+    getMoviesBySearch(query);
 }
 
 function movieDetailsPage(){
