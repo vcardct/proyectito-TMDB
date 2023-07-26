@@ -9,7 +9,8 @@ trendingBtn.addEventListener('click', () => {
 });
 
 arrowBtn.addEventListener('click', () => {
-    location.hash = '#home';
+    history.back(); //Guardar el historial y cada que se presiona el botón de para atrás, nos llevará a los resultados anteriores
+    //location.hash = '#home';
 })
 
 window.addEventListener('DOMContentLoaded', navigator, false); // Llamarlo para la primera carga de la app
@@ -79,6 +80,10 @@ function trendsPage(){
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive'); //Quitar clase inactive
     movieDetailSection.classList.add('inactive');
+    
+    headerCategoryTitle.innerHTML = "Tendencias";
+
+    getTrendingMovies(); //Lista de películas en tendencia por categoría
 }
 
 function searchPage(){

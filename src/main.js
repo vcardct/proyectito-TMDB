@@ -101,4 +101,12 @@ async function getMoviesBySEarch(query){
     createMovies(movies, genericSection);
 }
 
+async function getTrendingMovies(){
+    const { data } = await api('trending/movie/day');
+    const movies = data.results;
+    console.log(movies);
+
+    createMovies(movies, genericSection);
+}
+
 getTrendingMoviesPreview();
