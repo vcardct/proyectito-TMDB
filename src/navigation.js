@@ -80,7 +80,7 @@ function trendsPage(){
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive'); //Quitar clase inactive
     movieDetailSection.classList.add('inactive');
-    
+
     headerCategoryTitle.innerHTML = "Tendencias";
 
     getTrendingMovies(); //Lista de películas en tendencia por categoría
@@ -122,6 +122,10 @@ function movieDetailsPage(){
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.add('inactive');
     movieDetailSection.classList.remove('inactive');
+
+    // ['#movie', 'idMovie']
+    const [_, movieId] = location.hash.split("=");
+    getMovieDetailsById(movieId);
 }
 
 function categoriesPage(){
