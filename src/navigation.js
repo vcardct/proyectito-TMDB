@@ -1,7 +1,7 @@
 //  Ya no se llaman las funciones automaticamente sino llamarlo desde este archivo cuando el location o hash change avise en qué vista está (principal u otra)
 
 searchFormBtn.addEventListener('click', () => {
-    location.hash = '#search=';
+    location.hash = '#search='+ searchFormInput.value; //Buscar el valor que escribio el usuario y concatenarlo a la busqueda
 });
 
 trendingBtn.addEventListener('click', () => {
@@ -89,13 +89,17 @@ function searchPage(){
     arrowBtn.classList.remove('inactive'); //Para que no aparezca en esa sección
     arrowBtn.classList.remove('header-arrow--white'); //Para que aparezca la flecha en blanco y no morado
     headerTitle.classList.add('inactive'); // En caso que lo llegue a tener, quitarle la clase inactive para que se muestre
-    headerCategoryTitle.classList.remove('inactive'); //Esconderlo porque no estamos en categoría
+    headerCategoryTitle.classList.add('inactive'); //Esconderlo porque no estamos en categoría
     searchForm.classList.remove('inactive');
 
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive'); //Quitar clase inactive
     movieDetailSection.classList.add('inactive');
+
+    // ['#search'], 'LoQUeSEHayaBuscado']
+    const [_, query] = location.hash.split("="); //convertir en un array lo que se tenga en un string
+    getMoviesBySEarch(query);
 }
 
 function movieDetailsPage(){

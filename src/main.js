@@ -88,4 +88,17 @@ async function getMoviesByCategory(id){
     createMovies(movies, genericSection);
 }
 
+async function getMoviesBySEarch(query){
+    const { data } = await api('search/movie', {
+        params: {
+        query,
+    },
+    });
+//    const data = await res.json(); //Ya no se usa para convertir los objetos a JavaScript porque axios da una respuesta distinta
+    const movies = data.results;
+
+  //  genericSection.innerHTML = ""; // Insercion de peliculas
+    createMovies(movies, genericSection);
+}
+
 getTrendingMoviesPreview();
